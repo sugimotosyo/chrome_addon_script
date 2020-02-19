@@ -56,7 +56,7 @@ var renkei = function(){
         },
         error: function (data,status) {
           console.log(data)
-          alert("error")
+          alert("error1")
         },        
       });
 }
@@ -77,7 +77,7 @@ var requestGasPost = function(data){
         },
         error: function (data,status) {
           console.log(data)
-          alert("error")
+          alert("error2")
         },        
       });
 }
