@@ -51,9 +51,8 @@ var renkei = function(){
         data:  $(targetForm).serialize(),
         type:'POST',
         success: function (data) {
-        //   console.log(data)
-        requestGasPost(data)
-          alert("success")
+            //   console.log(data)
+            requestGasPost(data)
         },
         error: function (data,status) {
           console.log(data)
@@ -81,7 +80,6 @@ var requestGasPost = function(data){
           alert("error")
         },        
       });
-      window.close()
 }
 
 
