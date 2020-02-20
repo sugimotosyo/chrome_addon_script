@@ -51,12 +51,12 @@ var renkei = function(){
         data:  $(targetForm).serialize(),
         type:'POST',
         success: function (data) {
-            //   console.log(data)
+            console.log(data)
             requestGasPostRiknabi(data)
         },
         error: function (data,status) {
           console.log(data)
-          alert("error1")
+          alert("rikunabi error1")
         },        
       });
 }
@@ -74,11 +74,11 @@ var requestGasPostRiknabi = function(data){
         contentType: 'application/json',
         success: function (data) {
           console.log(data)
-          alert("success")
+          alert("rikunabi success")
         },
         error: function (data,status) {
           console.log(data)
-          alert("error2")
+          alert("rikunabi error2")
         },        
       });
 }
