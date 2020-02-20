@@ -67,5 +67,5 @@ var requestGasPostMainabi = function(data){
           alert("mainabi error2")
         },        
       });
-      // window.close()
+      window.close()
 }
