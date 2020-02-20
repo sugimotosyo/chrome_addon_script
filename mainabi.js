@@ -38,35 +38,34 @@ if (hostname == "tenshoku.mynavi.jp" && pathname == "/client/entrycommunication/
       //dataType: 'html',
       success: function (data) {
         //console.log(data)
-        requestGasPost(data)
+        requestGasPostMainabi(data)
       },
       error: function (data) {
         alert('error1');
       }
     });
   });
-  //gas(gasへのポストを行うサーバー処理)へ連携する
-  var requestGasPost = function (data) {
+}
+
+//gas(gasへのポストを行うサーバー処理)への連携
+var requestGasPostMainabi = function(data){
     var now = new Date().getTime()
     var url = "https://enjoy-api.enjoy-ps.com/gaspost"
     var baitai = "mainabi"
 
     $.ajax({
-      url: url,
-      data: JSON.stringify({ value: { date: now, baitai: baitai, data: data } }),
-      type: 'POST',
-      contentType: 'application/json',
-      success: function (data) {
-        console.log(data)
-        alert("success")
-      },
-      error: function (data, status) {
-        console.log(data)
-        alert("error2")
-      },
-    });
-    window.close()
-  }
+        url: url,
+        data: JSON.stringify({value:{ date: now,baitai:baitai,data: data }}),
+        type:'POST',
+        contentType: 'application/json',
+        success: function (data) {
+          console.log(data)
+          alert("success")
+        },
+        error: function (data,status) {
+          console.log(data)
+          alert("error2")
+        },        
+      });
+      window.close()
 }
-
-
