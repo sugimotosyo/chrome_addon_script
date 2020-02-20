@@ -38,6 +38,7 @@ if (hostname == "tenshoku.mynavi.jp" && pathname == "/client/entrycommunication/
       //dataType: 'html',
       success: function (data) {
         console.log(data)
+        alert("実行開始")
         requestGasPostMainabi(data)
       },
       error: function (data) {
@@ -61,11 +62,13 @@ var requestGasPostMainabi = function(data){
         success: function (data) {
           console.log(data)
           alert("mainabi success")
+          window.close()
         },
         error: function (data,status) {
           console.log(data)
           alert("mainabi error2")
+          window.close()    
         },        
       });
-      // window.close()
+ 
 }
