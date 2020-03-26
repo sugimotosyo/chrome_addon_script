@@ -2,12 +2,12 @@ var hostname = location.hostname;
 var pathname = location. pathname;
 
 // SCRIPTタグの生成
-if(hostname == "saiyo.rikunabi.com" && pathname=="/rnc/docs/cc_s04011.jsp"){
+if(hostname == "saiyo.rikunabi.com"){
     var el = document.createElement("script");
     // SCRIPTタグのSRC属性に読み込みたいファイルを指定
     el.type="text/javascript";
     el.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js";
-    
+
     // BODY要素の最後に追加
     document.body.appendChild(el);
     el.addEventListener('load', function() {
@@ -16,6 +16,11 @@ if(hostname == "saiyo.rikunabi.com" && pathname=="/rnc/docs/cc_s04011.jsp"){
             //リクナビ応募者一覧
             if(hostname == "saiyo.rikunabi.com" && pathname=="/rnc/docs/cc_s04011.jsp"){
                 setTimeout(rikunabiitirann, 1000);
+            }else if(hostname == "saiyo.rikunabi.com" && pathname=="/"){
+                
+                $('input[name="login_nm"]').val("35014680011747")
+                $('input[name="pswd"]').val("")
+
             }
         })
     
