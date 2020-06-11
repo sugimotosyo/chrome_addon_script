@@ -16,6 +16,7 @@ if(hostname == "saiyo.rikunabi.com"){
             //リクナビ応募者一覧
             if(hostname == "saiyo.rikunabi.com" && pathname=="/rnc/docs/cc_s04011.jsp"){
                 setTimeout(rikunabiitirann, 1000);
+                setTimeout(rikunabiDomObserver, 1000);
             }else if(hostname == "saiyo.rikunabi.com" && pathname=="/"){
                 
                 $('input[name="login_nm"]').val("35014680011747")
@@ -90,15 +91,21 @@ var requestGasPostRiknabi = function(data){
 
 
 
+var processingFlg = false
 //リクナビの一覧処理
 var rikunabiitirann = function(){
+    processingFlg = true
      //連携ボタン追加
-     $(".bulkActions").append('<button onclick="renkei();" data-v-a8e346f8="" data-v-5bbe0678="" id="renkei_button" type="button" class="button button--basic button--small">連携する</button>')
-    
+     if($("#renkei_button").length < 1){
+        $(".bulkActions").append('<button onclick="renkei();" data-v-a8e346f8="" data-v-5bbe0678="" id="renkei_button" type="button" class="button button--basic button--small">連携する</button>')
+     }
+
      var mensetucheckStr = "";
     //行を取得
     var rows = $(".tableWrapper").find(".table__row");
     rows.each((i, row)=>{
+        $(row).css("background-color","");
+
         //備考
         var biko = $(row).find(".table__cell--remarksText").text();
         if(biko.indexOf("内定") >= 0 ){
@@ -160,7 +167,7 @@ var rikunabiitirann = function(){
 
             if(now.getFullYear() == mensetubiDate.getFullYear() && now.getMonth() === mensetubiDate.getMonth() ){
                 //当日と明日の面接予定を出す。
-                if(now.getDate() == mensetubiDate.getDate() || now.getDate()+1 == mensetubiDate.getDate()){
+                if(now.getDate() == mensetubiDate.getDate() || now.getDate()+1 == mensetubiDate.getDate()|| now.getDate()+2 == mensetubiDate.getDate()|| now.getDate()+3 == mensetubiDate.getDate()){
                     mensetucheckStr = mensetucheckStr +$(row).find(".userName").text()+ mensetubi+mensetujikan+ "<br>"
                 }
             }
@@ -169,4 +176,38 @@ var rikunabiitirann = function(){
     });
 
     $(".header").before(mensetucheckStr)
+
+    processingFlg = false
+}
+
+
+//DOMの監視
+// https://blog.gutyan.jp/entry/2014/09/06/MutationObserver
+var rikunabiDomObserver = function(){
+
+
+// 第一引数に変更されたDOMの詳細が入った連想配列（MutationRecordsと呼ばれる）を含む配列が、
+// 第二引数に呼び出し元のMutationObserverのインスタンスが入る
+    var mo = new MutationObserver(function(d,el){
+        console.log("do observer")
+
+        //ここで色を変更する。
+        if(!processingFlg){
+            rikunabiitirann()
+        }
+        
+    });
+
+    //監視対象（単一のＤＯＭのみ）
+    var target = $(".tableWrapper")[0]
+    //監視オプション
+    var options = {
+        attributes:true,
+        characterData:true,  
+        childList: true,
+        subtree:true,
+        attributeFilter:["table__row"]
+    };
+
+    mo.observe(target, options);
 }
