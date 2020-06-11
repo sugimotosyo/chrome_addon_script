@@ -166,9 +166,22 @@ var rikunabiitirann = function(){
             var now = new Date();
 
             if(now.getFullYear() == mensetubiDate.getFullYear() && now.getMonth() === mensetubiDate.getMonth() ){
-                //当日と明日の面接予定を出す。
-                if(now.getDate() == mensetubiDate.getDate() || now.getDate()+1 == mensetubiDate.getDate()|| now.getDate()+2 == mensetubiDate.getDate()|| now.getDate()+3 == mensetubiDate.getDate()){
-                    mensetucheckStr = mensetucheckStr +$(row).find(".userName").text()+ mensetubi+mensetujikan+ "<br>"
+                //7日先までのデータを出す。
+                if(now.getDate() <= mensetubiDate.getDate() && now.getDate()+7 >= mensetubiDate.getDate()){
+                    //まだ記載されていないものだけ入れる
+
+                    var insertFlg = true
+
+                    $('.mensetu_target_name').each(function(index, element){
+                        if($(element).text() == $(row).find(".userName").text()){
+                            insertFlg = false
+                            return
+                        }
+                      })
+
+                    if(insertFlg){
+                    mensetucheckStr = mensetucheckStr +"<span class='mensetu_target_name' style='min-width:'>"+$(row).find(".userName").text()+"</span><span> "+ mensetubi+" "+mensetujikan+ "</span><br>"
+                    }
                 }
             }
         }
