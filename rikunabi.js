@@ -187,6 +187,7 @@ var rikunabiitirann = function(){
                             +mensetujikan
                             +"</span>"
                             +"<span class='mensetu_target_name' style='min-width:'>"
+                            +" "
                             +$(row).find(".userName").text()
                             +"</span><br>";
                     }
