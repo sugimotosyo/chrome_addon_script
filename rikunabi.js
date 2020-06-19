@@ -180,7 +180,15 @@ var rikunabiitirann = function(){
                       })
 
                     if(insertFlg){
-                    mensetucheckStr = mensetucheckStr +"<span class='mensetu_target_name' style='min-width:'>"+$(row).find(".userName").text()+"</span><span> "+ mensetubi+" "+mensetujikan+ "</span><br>"
+                        mensetucheckStr = mensetucheckStr
+                            +"<span>"
+                            +mensetubi
+                            +" "
+                            +mensetujikan
+                            +"</span>"
+                            +"<span class='mensetu_target_name' style='min-width:'>"
+                            +$(row).find(".userName").text()
+                            +"</span><br>";
                     }
                 }
             }
